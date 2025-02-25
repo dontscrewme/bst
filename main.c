@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <assert.h>
+#include <stdbool.h>
 
 /* Your BST code goes here (or include its header). */
 struct bst
@@ -125,6 +126,63 @@ struct bst* bst_pop_minimum(struct bst** root)
         return min;
     }
     return bst_pop_minimum(&((*root)->left));
+}
+
+int max(int a, int b)
+{
+    return (a>b)? a:b;
+}
+
+int bst_get_height(struct bst* root)
+{
+    if (root == NULL)
+    {
+        return -1;
+    }
+
+    int height_left = bst_get_height(root->left);
+    int height_right = bst_get_height(root->right);
+ 
+    return 1 + max(height_left, height_right);
+}
+
+#include <math.h>
+int bst_check_balance(struct bst* root) {
+    if (root)
+    {
+        return -1;
+    }
+
+    int left_height = bst_check_balance(root->left);
+    if (left_height == -2)
+    {
+        return -2;
+    }
+
+    int right_height = bst_check_balance(root->right);
+    if (right_height == -2)
+    {
+        return -2;
+    }
+
+    if (abs(left_height - right_height) > 1)
+    {
+        return -2;
+    }
+
+    return 1 + max(left_height, right_height);
+}
+
+bool bst_is_balanced(struct bst* root)
+{
+    if (bst_check_balance(root) == -2)
+    {
+        return false;
+    }
+    else
+    {
+        return true;
+    }
 }
 
 /* ========================= TEST CODE BELOW ========================= */
