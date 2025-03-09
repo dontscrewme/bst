@@ -115,7 +115,7 @@ struct bst* bst_find_minimum(struct bst* root)
 
 struct bst* bst_pop_minimum(struct bst** root)
 {
-    if (*root == NULL)
+    if (root == NULL || *root == NULL)
     {
         return NULL;
     }
