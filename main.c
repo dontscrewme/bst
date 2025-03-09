@@ -148,7 +148,7 @@ int bst_get_height(struct bst* root)
 
 #include <math.h>
 int bst_check_balance(struct bst* root) {
-    if (root)
+    if (root == NULL)
     {
         return -1;
     }
